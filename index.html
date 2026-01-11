@@ -1,126 +1,126 @@
-<!DOCTYPE html>				<!-- 宣告 HTML5 文件類型 -->
-<html lang="zh-TW">			<!-- 指定網頁語系為繁體中文（台灣） -->
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-<meta charset="UTF-8">	 		<!-- 設定字元編碼為 UTF-8，避免中文亂碼 -->
-<title>活動資訊</title>			<!-- 瀏覽器分頁顯示的標題 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">		  <!-- 載入 Google Fonts：思源宋體（繁體中文） -->
+<meta charset="UTF-8">
+<title>活動資訊 - 楓葉飄落</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --space-left-middle: 40px;	/* 左欄與中欄的間距 */
-  --space-middle-right: 40px;	/* 中欄與右欄的間距 */
-  --title-height: 50px;		/* 標題區塊高度 */
-  --btn-radius: 12px;		/* 按鈕圓角半徑 */
+  --space-left-middle: 40px;
+  --space-middle-right: 40px;
+  --title-height: 50px;
+  --btn-radius: 12px;
 }
 
 body {
-  background-color: #000;	
-  margin: 0;			
-  font-family: 'Noto Serif TC', 'Microsoft JhengHei', serif;	      
-  color: white;			
-  overflow-x: hidden;		
+  background-color: #000;
+  margin: 0;
+  font-family: 'Noto Serif TC', 'Microsoft JhengHei', serif;
+  color: white;
+  overflow-x: hidden;
 }
 
 .container {
-  margin-top: 80px;		
-  display: flex;		
-  flex-wrap: wrap;		
-  padding: 20px 40px;	
+  margin-top: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 40px;
 }
 
 .info {
-  flex: 0 0 300px;				
-  line-height: 2;				
-  letter-spacing: 1px;				
-  margin-right: var(--space-left-middle);	
-  text-align: center;				
-  font-size: 1.1em;				
+  flex: 0 0 300px;
+  line-height: 2;
+  letter-spacing: 1px;
+  margin-right: var(--space-left-middle);
+  text-align: center;
+  font-size: 1.1em;
 }
 
 .info .t-red, .info .t-purple { font-size: 1.3em; }
 
 .info-title {
-  text-align: center;					
-  font-size: 1.5em;					
-  font-weight: 600;					
-  padding-bottom: 10px;					
-  border-bottom: 3px solid #fff;			
-  width: 100%;						
-  box-sizing: border-box;				
-  height: var(--title-height);				
-  display: flex;					
-  align-items: center;					
-  justify-content: center;				
-  margin-bottom: 20px;					
-  color: #ffcc00;					
-  text-shadow: 1px 1px 3px #000;			
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #fff;
+  width: 100%;
+  box-sizing: border-box;
+  height: var(--title-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #ffcc00;
+  text-shadow: 1px 1px 3px #000;
 }
 
-.links { 
-  flex: 0 0 280px;				
-  margin-right: var(--space-middle-right);	
+.links {
+  flex: 0 0 280px;
+  margin-right: var(--space-middle-right);
 }
 
 .links-title {
-  text-align: center;				
-  font-size: 1.5em; 				
-  font-weight: 600;				
-  padding-bottom: 10px;				
-  border-bottom: 3px solid #fff;		
-  width: 100%;					
-  box-sizing: border-box;			
-  height: var(--title-height);			
-  display: flex;				
-  align-items: center;				
-  justify-content: center;			
-  margin-bottom: 20px;				
-  color: #ffcc00;				
-  text-shadow: 1px 1px 3px #000;		
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #fff;
+  width: 100%;
+  box-sizing: border-box;
+  height: var(--title-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #ffcc00;
+  text-shadow: 1px 1px 3px #000;
 }
 
 .links .btn {
-  display: block;				
-  text-align: center;				
-  padding: 14px;				
-  margin-bottom: 12px;				
-  border-radius: var(--btn-radius);		
-  color: #fff;					
-  font-weight: 600;				
-  text-decoration: none;			
-  font-size: 1.1em;				
-  transition: transform 0.2s, filter 0.2s;	
+  display: block;
+  text-align: center;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: var(--btn-radius);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: transform 0.2s, filter 0.2s;
 }
 
-.links .btn:hover {				
-  transform: scale(1.08);			
+.links .btn:hover {
+  transform: scale(1.08);
 }
 
-.images { flex: 0 0 300px; }			
-.images img { 
-  width: 100%;					
-  border-radius: 12px;				
-  margin-bottom: 12px;				
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5);	
+.images { flex: 0 0 300px; }
+.images img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 .images img:nth-child(2),
 .images img:nth-child(3) {
-  width: 50%;      				
-  margin: 0 auto 12px;  			
-  display: block;       			
+  width: 50%;
+  margin: 0 auto 12px;
+  display: block;
 }
 
-.t-red { color: #ff4d4d; }		
-.t-orange { color: #ffa500; }	
-.t-yellow { color: #ffd700; }	
-.t-green { color: #5cff5c; }	
-.t-blue { color: #4db8ff; }		
-.t-indigo { color: #9b7cff; }	
-.t-purple { color: #d88cff; }	
-.t-beige { color: #e8e0c8; }	
+.t-red { color: #ff4d4d; }
+.t-orange { color: #ffa500; }
+.t-yellow { color: #ffd700; }
+.t-green { color: #5cff5c; }
+.t-blue { color: #4db8ff; }
+.t-indigo { color: #9b7cff; }
+.t-purple { color: #d88cff; }
+.t-beige { color: #e8e0c8; }
 
-@media (max-width: 900px) {				
-  .container { flex-direction: column; padding: 20px; }		
-  .info, .links, .images { flex: 1 1 auto; margin-right: 0; margin-bottom: 20px; }	
-  .info-title, .links-title { height: auto; display: block; text-align: center; padding-bottom: 8px; }	 
+@media (max-width: 900px) {
+  .container { flex-direction: column; padding: 20px; }
+  .info, .links, .images { flex: 1 1 auto; margin-right: 0; margin-bottom: 20px; }
+  .info-title, .links-title { height: auto; display: block; text-align: center; padding-bottom: 8px; }
 }
 
 .sakura {
@@ -131,6 +131,7 @@ body {
     will-change: transform, opacity;
     animation: fall var(--dur, 8s) linear forwards;
     filter: drop-shadow(0 3px 6px rgba(0,0,0,0.22));
+    z-index: 1;
 }
 
 @keyframes fall {
@@ -147,57 +148,56 @@ body {
 
 .sakura .petal { animation: sway var(--dur,8s) ease-in-out infinite; }
 
-.hamburger-menu {                
-  position: fixed;               
-  top: 20px;                     
-  left: 20px;                    
-  display: flex;                 
-  align-items: center;           
-  gap: 8px;                      
-  cursor: pointer;               
-  z-index: 100;                  
-  font-size: 1.3em;              
-  color: #fff;                   
+.hamburger-menu {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 100;
+  font-size: 1.3em;
+  color: #fff;
 }
 
 .dropdown-content {
-  display: none;                         
-  position: fixed;                      
-  top: 60px;                            
-  left: 20px;                           
-  background-color: rgba(50,50,50,0.9); 
-  width: 220px;                         
-  border-radius: 7px;                  
-  overflow-y: auto;                    
-  max-height: calc(47px * 11);          
-  z-index: 99;                          
-  flex-direction: column;              
-  gap: 10px;                           
-  opacity: 0;                          
-  transition: all 0.3s ease;           
-  transform: translateY(-10px);        
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  background-color: rgba(50,50,50,0.9);
+  width: 220px;
+  border-radius: 7px;
+  overflow-y: auto;
+  max-height: calc(47px * 11);
+  z-index: 99;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: translateY(-10px);
 }
 
 .dropdown-content.show {
-  display: flex;                
-  opacity: 1;                   
-  transform: translateY(0);     
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .dropdown-content a {
-  display: block;               
-  padding: 12px 20px;           
-  color: white;                 
-  text-decoration: none;        
-  font-size: 1em;               
-  background-color: #999;       
-  border-radius: 8px;           
-  text-align: center;           
-  transition: filter 0.3s;      
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  background-color: #999;
+  border-radius: 8px;
+  text-align: center;
+  transition: filter 0.3s;
 }
 
 .dropdown-content a:hover { filter: brightness(80%); }
-
 </style>
 </head>
 <body>
@@ -208,7 +208,6 @@ body {
 </div>
 
 <div class="dropdown-content" id="dropdown-content">
-  <!-- 你的連結... 保留原本 -->
 </div>
 
 <div class="container">
@@ -234,34 +233,63 @@ body {
 
   <div class="links">
     <div class="links-title">報名連結</div>
-    <!-- 按鈕連結保留 -->
   </div>
 
   <div class="images">
-    <img src="https://raw.githubusercontent.com/Sin-Nan-0510/test/main/炎魔.gif" alt="Image">
+    <img src="https://raw.githubusercontent.com/Sin-Nan-0510/test1/炎魔.gif" alt="Image">
   </div>
 </div>
 
 <script>
+// 漢堡選單
+const hamburger = document.querySelector('.hamburger-menu');
+const dropdown = document.getElementById('dropdown-content');
+hamburger.addEventListener('click', e => {
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+});
+window.addEventListener('click', () => dropdown.classList.remove('show'));
+dropdown.addEventListener('click', e => e.stopPropagation());
+
+// 彩虹按鈕
+const rainbowColors=['#ea4335','#ff6d01','#fbbc05','#34a853','#00bcd4','#4285f4','#a142f4'];
+const buttons = document.querySelectorAll('.links .btn');
+buttons.forEach((btn, index)=>{
+  const color = rainbowColors[index % rainbowColors.length];
+  btn.style.background = color;
+  btn.addEventListener('mouseover', ()=>btn.style.filter='brightness(120%)');
+  btn.addEventListener('mouseout', ()=>btn.style.filter='brightness(100%)');
+});
+
+// 楓葉飄落
 (function(){
     const svgns="http://www.w3.org/2000/svg";
     const rand=(min,max)=>min+Math.random()*(max-min);
 
-    function createPetal(){
+    const leafColors = [
+        ["#ff4d4d","#ff9900"],
+        ["#ff6600","#ffcc33"],
+        ["#ff9933","#ffd700"],
+        ["#cc3300","#ff6600"]
+    ];
+
+    function createLeaf(){
         const svg=document.createElementNS(svgns,"svg");
         svg.setAttribute("viewBox","0 0 100 100");
         svg.classList.add("sakura");
 
-        const dur=rand(6,12);
+        const dur=rand(6,14);
         svg.style.setProperty("--dur",dur+"s");
-        svg.style.setProperty("--rot-start",rand(-20,20)+"deg");
-        svg.style.setProperty("--rot-end",rand(180,540)+"deg");
-        svg.style.setProperty("--drift",rand(10,40)+"px");
+        svg.style.setProperty("--rot-start",rand(-45,45)+"deg");
+        svg.style.setProperty("--rot-end",rand(180,720)+"deg");
+        svg.style.setProperty("--drift",rand(15,60)+"px");
         svg.style.left=rand(0,100)+"vw";
-        svg.style.opacity=rand(0.8,1);
-        const size=rand(25,60);
+        svg.style.opacity=rand(0.7,1);
+        const size=rand(20,70);
         svg.style.width=size+"px";
         svg.style.height=size+"px";
+
+        const colors = leafColors[Math.floor(Math.random()*leafColors.length)];
 
         const defs=document.createElementNS(svgns,"defs");
         const grad=document.createElementNS(svgns,"linearGradient");
@@ -273,10 +301,10 @@ body {
         grad.setAttribute("y2","100%");
         const s1=document.createElementNS(svgns,"stop");
         s1.setAttribute("offset","0%");
-        s1.setAttribute("stop-color","#ff4d00");
+        s1.setAttribute("stop-color",colors[0]);
         const s2=document.createElementNS(svgns,"stop");
         s2.setAttribute("offset","70%");
-        s2.setAttribute("stop-color","#ffa500");
+        s2.setAttribute("stop-color",colors[1]);
         grad.appendChild(s1);
         grad.appendChild(s2);
         defs.appendChild(grad);
@@ -285,36 +313,17 @@ body {
         const path=document.createElementNS(svgns,"path");
         path.setAttribute("class","petal");
         path.setAttribute("fill",`url(#${gid})`);
-        path.setAttribute("d","M50 5 L55 20 L70 20 L58 32 L65 50 L50 40 L35 50 L42 32 L30 20 L45 20 Z");
-        path.setAttribute("opacity",rand(0.85,1));
+        path.setAttribute("d","M50 0 L55 20 L70 20 L58 32 L65 50 L50 40 L35 50 L42 32 L30 20 L45 20 Z");
+        path.setAttribute("opacity",rand(0.7,1));
         svg.appendChild(path);
 
         document.body.appendChild(svg);
         setTimeout(()=>svg.remove(),(dur*1000)+2000);
     }
 
-    setInterval(createPetal,300);
+    setInterval(createLeaf,250);
 })();
-
-const hamburger = document.querySelector('.hamburger-menu');
-const dropdown = document.getElementById('dropdown-content');
-hamburger.addEventListener('click', e => {
-    e.stopPropagation();
-    dropdown.classList.toggle('show');
-});
-window.addEventListener('click', () => dropdown.classList.remove('show'));
-dropdown.addEventListener('click', e => e.stopPropagation());
-
-const rainbowColors=['#ea4335','#ff6d01','#fbbc05','#34a853','#00bcd4','#4285f4','#a142f4'];
-const buttons = document.querySelectorAll('.links .btn');
-buttons.forEach((btn, index)=>{
-  const color = rainbowColors[index % rainbowColors.length];
-  btn.style.background = color;
-  btn.addEventListener('mouseover', ()=>btn.style.filter='brightness(120%)');
-  btn.addEventListener('mouseout', ()=>btn.style.filter='brightness(100%)');
-});
 </script>
 
 </body>
 </html>
-
