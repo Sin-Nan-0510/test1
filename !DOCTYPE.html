@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>活動資訊</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --space-left-middle: 40px;
+  --space-middle-right: 40px;
+  --title-height: 50px;
+  --btn-radius: 12px;
+}
+
+/* 全域樣式 */
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Noto Serif TC', 'Microsoft JhengHei', serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+.container {
+  margin-top: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 40px;
+}
+
+.info { flex: 0 0 300px; line-height: 2; letter-spacing: 1px; margin-right: var(--space-left-middle); text-align: center; font-size: 1.1em; }
+.info .t-red, .info .t-purple { font-size: 1.3em; }
+.info-title { text-align:center; font-size:1.5em; font-weight:600; padding-bottom:10px; border-bottom:3px solid #fff; width:100%; box-sizing:border-box; height:var(--title-height); display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:#ffcc00; text-shadow:1px 1px 3px #000; }
+
+.links { flex:0 0 280px; margin-right: var(--space-middle-right); }
+.links-title { text-align:center; font-size:1.5em; font-weight:600; padding-bottom:10px; border-bottom:3px solid #fff; width:100%; box-sizing:border-box; height:var(--title-height); display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:#ffcc00; text-shadow:1px 1px 3px #000; }
+.links .btn { display:block; text-align:center; padding:14px; margin-bottom:12px; border-radius:var(--btn-radius); color:#fff; font-weight:600; text-decoration:none; font-size:1.1em; transition: transform 0.2s, filter 0.2s; }
+.links .btn:hover { transform: scale(1.08); }
+
+.images { flex:0 0 300px; }
+.images img { width:100%; border-radius:12px; margin-bottom:12px; box-shadow:0 4px 8px rgba(0,0,0,0.5); }
+.images img:nth-child(2),
+.images img:nth-child(3) { width:20%; margin:0 auto 12px; display:block; }
+
+.t-red { color: #ff4d4d; }
+.t-orange { color: #ffa500; }
+.t-yellow { color: #ffd700; }
+.t-green { color: #5cff5c; }
+.t-blue { color: #4db8ff; }
+.t-indigo { color: #9b7cff; }
+.t-purple { color: #d88cff; }
+.t-beige { color: #e8e0c8; }
+
+@media (max-width: 900px) {
+  .container { flex-direction: column; padding: 20px; }
+  .info, .links, .images { flex:1 1 auto; margin-right:0; margin-bottom:20px; }
+  .info-title, .links-title { height:auto; display:block; text-align:center; padding-bottom:8px; }
+}
+
+/* --------------------
+   楓葉飄落 CSS
+-------------------- */
+.maple {
+    position: fixed;
+    top: -30px;
+    pointer-events: none;
+    transform-origin: center;
+    will-change: transform, opacity;
+    animation: fall var(--dur,8s) linear forwards;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.22));
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(var(--rot-start,0deg)); opacity:1; }
+    80% { opacity:0.95; }
+    100% { transform: translateY(120vh) rotate(var(--rot-end,360deg)); opacity:0.4; }
+}
+
+@keyframes sway {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(var(--drift,20px)); }
+    100% { transform: translateX(0); }
+}
+
+.maple .leaf { animation: sway var(--dur,8s) ease-in-out infinite; }
+
+/* 漢堡選單 */
+.hamburger-menu { position: fixed; top:20px; left:20px; display:flex; align-items:center; gap:8px; cursor:pointer; z-index:100; font-size:1.3em; color:#fff; }
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  background-color: rgba(50,50,50,0.9);
+  width: 220px;
+  border-radius: 7px;
+  overflow-y: auto;
+  max-height: calc(47px * 11);
+  z-index: 99;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: translateY(-10px);
+}
+
+.dropdown-content.show { display:flex; opacity:1; transform:translateY(0); }
+.dropdown-content a { display:block; padding:12px 20px; color:white; text-decoration:none; font-size:1em; background-color:#999; border-radius:8px; text-align:center; transition:filter 0.3s; }
+.dropdown-content a:hover { filter:brightness(80%); }
+</style>
+</head>
+<body>
+
+<div class="hamburger-menu">
+  <span>☰</span>
+  <span class="hamburger-text">歷史隊伍</span>
+</div>
+
+<div class="dropdown-content" id="dropdown-content">
+  <!-- 下拉選單連結省略，保持原本內容 -->
+</div>
+
+<div class="container">
+  <div class="info">
+    <div class="info-title">活動資訊</div>
+    <div class="t-red">建議等級　110等以上</div>
+    <div class="t-orange">劍　士　－　『UP』</div>
+    <div class="t-yellow">祭　司　－　　『AP』－乾表</div>
+    <div class="t-yellow">冰　雷　－　　『AP』－乾表</div>
+    <div class="t-yellow">火　毒　－　　『AP』－乾表</div>
+    <div class="t-green">遊　俠　－　　『AD』－乾表</div>
+    <div class="t-green">狙擊手　－　　『AD』－乾表</div>
+    <div class="t-blue">神槍手　－　　『AD』－乾表</div>
+    <div class="t-blue">格鬥家　－　　『AD』－乾表</div>
+    <div class="t-indigo">神　偷　－　　『AD』－乾表</div>
+    <div class="t-indigo">暗殺者　－　　『AD』－乾表</div>
+    <br>
+    <div class="t-purple">入場費：雪花x2 ＋ D片x1</div>
+    <br>
+    <div class="t-beige">※ 攻擊力為建議值，</div>
+    <div class="t-beige">實際依裝備 / 職業 / 熟練度不同。</div>
+  </div>
+
+  <div class="links">
+    <div class="links-title">報名連結</div>
+	  <a href="#" target="_blank" class="btn">　　</a>
+    <a href="#" target="_blank" class="btn">　　</a>
+    <a href="#" target="_blank" class="btn">　　</a>
+	  <a href="#" target="_blank" class="btn">　　</a> 
+    <a href="#" target="_blank" class="btn">　　</a>
+    <a href="#" target="_blank" class="btn">　　</a>
+  	<a href="#" target="_blank" class="btn">　　</a> 
+  </div>
+
+  <div class="images">
+    <img src="https://raw.githubusercontent.com/Sin-Nan-0510/Sin-Nan-0510/main/炎魔.gif" alt="Image">
+  </div>
+</div>
+
+<script>
+// --------------------
+// 楓葉動畫
+// --------------------
+(function(){
+    const svgns="http://www.w3.org/2000/svg";
+    const rand=(min,max)=>min+Math.random()*(max-min);
+
+    function createLeaf(){
+        const svg=document.createElementNS(svgns,"svg");
+        svg.setAttribute("viewBox","0 0 100 100");
+        svg.classList.add("maple"); // 改成 maple
+
+        const dur=rand(6,12);
+        svg.style.setProperty("--dur",dur+"s");
+        svg.style.setProperty("--rot-start",rand(-20,20)+"deg");
+        svg.style.setProperty("--rot-end",rand(180,540)+"deg");
+        svg.style.setProperty("--drift",rand(10,40)+"px");
+        svg.style.left=rand(0,100)+"vw";
+        svg.style.opacity=rand(0.8,1);
+        const size=rand(18,50);
+        svg.style.width=size+"px";
+        svg.style.height=size+"px";
+
+        const defs=document.createElementNS(svgns,"defs");
+        const grad=document.createElementNS(svgns,"linearGradient");
+        const gid="grad"+Date.now()+Math.random();
+        grad.setAttribute("id",gid);
+        grad.setAttribute("x1","0%");
+        grad.setAttribute("y1","0%");
+        grad.setAttribute("x2","100%");
+        grad.setAttribute("y2","100%");
+        const s1=document.createElementNS(svgns,"stop");
+        s1.setAttribute("offset","0%");
+        s1.setAttribute("stop-color","#ff4500"); // 楓紅色
+        const s2=document.createElementNS(svgns,"stop");
+        s2.setAttribute("offset","70%");
+        s2.setAttribute("stop-color","#ff8c00"); // 橙紅色
+        grad.appendChild(s1);
+        grad.appendChild(s2);
+        defs.appendChild(grad);
+        svg.appendChild(defs);
+
+        const path=document.createElementNS(svgns,"path");
+        path.setAttribute("class","leaf"); // 對應 sway 動畫
+        path.setAttribute("fill",`url(#${gid})`);
+        path.setAttribute("d","M50 10 L58 35 L80 35 L62 50 L70 75 L50 60 L30 75 L38 50 L20 35 L42 35 Z"); // 楓葉形狀
+        path.setAttribute("opacity",rand(0.85,1));
+        svg.appendChild(path);
+
+        document.body.appendChild(svg);
+        setTimeout(()=>svg.remove(),(dur*1000)+2000);
+    }
+
+    setInterval(createLeaf,300);
+})();
+
+// --------------------
+// 漢堡選單功能
+// --------------------
+const hamburger = document.querySelector('.hamburger-menu');
+const dropdown = document.getElementById('dropdown-content');
+hamburger.addEventListener('click', e => { e.stopPropagation(); dropdown.classList.toggle('show'); });
+window.addEventListener('click', () => dropdown.classList.remove('show'));
+dropdown.addEventListener('click', e => e.stopPropagation());
+
+// --------------------
+// 彩虹按鈕背景
+// --------------------
+const rainbowColors=['#ea4335','#ff6d01','#fbbc05','#34a853','#00bcd4','#4285f4','#a142f4'];
+const buttons = document.querySelectorAll('.links .btn');
+buttons.forEach((btn,index)=>{
+  const color = rainbowColors[index % rainbowColors.length];
+  btn.style.background = color;
+  btn.addEventListener('mouseover', ()=>btn.style.filter='brightness(120%)');
+  btn.addEventListener('mouseout', ()=>btn.style.filter='brightness(100%)');
+});
+</script>
+
+</body>
+</html>
