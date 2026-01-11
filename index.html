@@ -209,6 +209,7 @@ body {
 </div>
 
 <div class="dropdown-content" id="dropdown-content">
+  <!-- 可在此加連結 -->
 </div>
 
 <div class="container">
@@ -234,6 +235,7 @@ body {
 
   <div class="links">
     <div class="links-title">報名連結</div>
+    <!-- 可加按鈕連結 -->
   </div>
 
   <div class="images">
@@ -252,7 +254,7 @@ hamburger.addEventListener('click', e => {
 window.addEventListener('click', () => dropdown.classList.remove('show'));
 dropdown.addEventListener('click', e => e.stopPropagation());
 
-// 彩虹按鈕
+// 彩虹按鈕（可自行增加按鈕） 
 const rainbowColors=['#ea4335','#ff6d01','#fbbc05','#34a853','#00bcd4','#4285f4','#a142f4'];
 const buttons = document.querySelectorAll('.links .btn');
 buttons.forEach((btn, index)=>{
@@ -262,15 +264,15 @@ buttons.forEach((btn, index)=>{
   btn.addEventListener('mouseout', ()=>btn.style.filter='brightness(100%)');
 });
 
-// 楓葉飄落
+// 楓葉飄落優化
 (function(){
     const svgns="http://www.w3.org/2000/svg";
     const rand=(min,max)=>min+Math.random()*(max-min);
 
     const leafColors = [
-        ["#ff4d4d","#ff9900"],
+        ["#ff3b3b","#ff9933"],
         ["#ff6600","#ffcc33"],
-        ["#ff9933","#ffd700"],
+        ["#ff9900","#ffd700"],
         ["#cc3300","#ff6600"]
     ];
 
@@ -279,19 +281,18 @@ buttons.forEach((btn, index)=>{
         svg.setAttribute("viewBox","0 0 100 100");
         svg.classList.add("sakura");
 
-        const dur=rand(6,14);
+        const dur=rand(6,12);
         svg.style.setProperty("--dur",dur+"s");
-        svg.style.setProperty("--rot-start",rand(-45,45)+"deg");
+        svg.style.setProperty("--rot-start",rand(-30,30)+"deg");
         svg.style.setProperty("--rot-end",rand(180,720)+"deg");
-        svg.style.setProperty("--drift",rand(15,60)+"px");
+        svg.style.setProperty("--drift",rand(20,80)+"px");
         svg.style.left=rand(0,100)+"vw";
         svg.style.opacity=rand(0.7,1);
-        const size=rand(20,70);
+        const size=rand(20,60);
         svg.style.width=size+"px";
         svg.style.height=size+"px";
 
         const colors = leafColors[Math.floor(Math.random()*leafColors.length)];
-
         const defs=document.createElementNS(svgns,"defs");
         const grad=document.createElementNS(svgns,"linearGradient");
         const gid="grad"+Date.now()+Math.random();
@@ -314,19 +315,19 @@ buttons.forEach((btn, index)=>{
         const path=document.createElementNS(svgns,"path");
         path.setAttribute("class","petal");
         path.setAttribute("fill",`url(#${gid})`);
-        path.setAttribute("d","M50 0 L55 20 L70 20 L58 32 L65 50 L50 40 L35 50 L42 32 L30 20 L45 20 Z");
+        path.setAttribute("d",
+            "M50 0 L60 20 L80 25 L65 40 L75 60 L50 50 L25 60 L35 40 L20 25 L40 20 Z"
+        );
         path.setAttribute("opacity",rand(0.7,1));
         svg.appendChild(path);
 
         document.body.appendChild(svg);
-        setTimeout(()=>svg.remove(),(dur*1000)+2000);
+        setTimeout(()=>svg.remove(), (dur*1000)+2000);
     }
 
-    setInterval(createLeaf,250);
+    setInterval(createLeaf,200);
 })();
 </script>
 
 </body>
 </html>
-
-
