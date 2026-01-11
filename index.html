@@ -123,32 +123,6 @@ body {
   .info-title, .links-title { height: auto; display: block; text-align: center; padding-bottom: 8px; }
 }
 
-/* 楓葉動畫 */
-.sakura {
-    position: fixed;
-    top: -30px;
-    pointer-events: none;
-    transform-origin: center;
-    will-change: transform, opacity;
-    animation: fall var(--dur, 8s) linear forwards;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.22));
-    z-index: 1;
-}
-
-@keyframes fall {
-    0% { transform: translateY(0) rotate(var(--rot-start,0deg)); opacity: 1; }
-    80% { opacity: 0.95; }
-    100% { transform: translateY(120vh) rotate(var(--rot-end,360deg)); opacity: 0.4; }
-}
-
-@keyframes sway {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(var(--drift,20px)); }
-    100% { transform: translateX(0); }
-}
-
-.sakura .petal { animation: sway var(--dur,8s) ease-in-out infinite; }
-
 .hamburger-menu {
   position: fixed;
   top: 20px;
@@ -263,70 +237,6 @@ buttons.forEach((btn, index)=>{
   btn.addEventListener('mouseover', ()=>btn.style.filter='brightness(120%)');
   btn.addEventListener('mouseout', ()=>btn.style.filter='brightness(100%)');
 });
-
-// 楓葉飄落優化
-(function(){
-    const svgns="http://www.w3.org/2000/svg";
-    const rand=(min,max)=>min+Math.random()*(max-min);
-
-    const leafColors = [
-        ["#ff3b3b","#ff9933"],
-        ["#ff6600","#ffcc33"],
-        ["#ff9900","#ffd700"],
-        ["#cc3300","#ff6600"]
-    ];
-
-    function createLeaf(){
-        const svg=document.createElementNS(svgns,"svg");
-        svg.setAttribute("viewBox","0 0 100 100");
-        svg.classList.add("sakura");
-
-        const dur=rand(6,12);
-        svg.style.setProperty("--dur",dur+"s");
-        svg.style.setProperty("--rot-start",rand(-30,30)+"deg");
-        svg.style.setProperty("--rot-end",rand(180,720)+"deg");
-        svg.style.setProperty("--drift",rand(20,80)+"px");
-        svg.style.left=rand(0,100)+"vw";
-        svg.style.opacity=rand(0.7,1);
-        const size=rand(20,60);
-        svg.style.width=size+"px";
-        svg.style.height=size+"px";
-
-        const colors = leafColors[Math.floor(Math.random()*leafColors.length)];
-        const defs=document.createElementNS(svgns,"defs");
-        const grad=document.createElementNS(svgns,"linearGradient");
-        const gid="grad"+Date.now()+Math.random();
-        grad.setAttribute("id",gid);
-        grad.setAttribute("x1","0%");
-        grad.setAttribute("y1","0%");
-        grad.setAttribute("x2","100%");
-        grad.setAttribute("y2","100%");
-        const s1=document.createElementNS(svgns,"stop");
-        s1.setAttribute("offset","0%");
-        s1.setAttribute("stop-color",colors[0]);
-        const s2=document.createElementNS(svgns,"stop");
-        s2.setAttribute("offset","70%");
-        s2.setAttribute("stop-color",colors[1]);
-        grad.appendChild(s1);
-        grad.appendChild(s2);
-        defs.appendChild(grad);
-        svg.appendChild(defs);
-
-        const path=document.createElementNS(svgns,"path");
-        path.setAttribute("class","petal");
-        path.setAttribute("fill",`url(#${gid})`);
-        path.setAttribute("d",
-            "M50 0 L60 20 L80 25 L65 40 L75 60 L50 50 L25 60 L35 40 L20 25 L40 20 Z"
-        );
-        path.setAttribute("opacity",rand(0.7,1));
-        svg.appendChild(path);
-
-        document.body.appendChild(svg);
-        setTimeout(()=>svg.remove(), (dur*1000)+2000);
-    }
-
-    setInterval(createLeaf,200);
-})();
 </script>
 
 </body>
