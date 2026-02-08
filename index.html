@@ -31,20 +31,20 @@
 </head>
 <body>
 
-<h2> WC / 楓幣 計算器</h2>
+<h2>楓之谷 WC / 楓幣 計算器</h2>
 
-<!-- 固定方案 -->
+<!-- 固定方案（預設 1990） -->
 <div class="row">
     <label>方案：</label>
     <select id="package" onchange="calculateAll()">
         <option value="120|800">120 台幣 = 800 WC</option>
-        <option value="1990|13200">1990 台幣 = 13,200 WC</option>
+        <option value="1990|13200" selected>1990 台幣 = 13,200 WC</option>
     </select>
 </div>
 
 <div id="calculator">
 
-    <!-- 第 1 行：突襲卷 -->
+    <!-- 第 1 行 -->
     <div class="row calc-row">
         <select class="item">
             <option selected>突襲卷</option>
@@ -57,7 +57,7 @@
         <div class="result">1 台幣 = <span>0</span> 楓幣</div>
     </div>
 
-    <!-- 第 2 行：高級瞬移石 -->
+    <!-- 第 2 行 -->
     <div class="row calc-row">
         <select class="item">
             <option>突襲卷</option>
@@ -70,7 +70,7 @@
         <div class="result">1 台幣 = <span>0</span> 楓幣</div>
     </div>
 
-    <!-- 第 3 行：飄雪結晶 -->
+    <!-- 第 3 行 -->
     <div class="row calc-row">
         <select class="item">
             <option>突襲卷</option>
@@ -83,7 +83,7 @@
         <div class="result">1 台幣 = <span>0</span> 楓幣</div>
     </div>
 
-    <!-- 第 4 行：其他 -->
+    <!-- 第 4 行 -->
     <div class="row calc-row">
         <select class="item">
             <option>突襲卷</option>
