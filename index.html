@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>WC / 楓幣 換算</title>
+<title>WC / 楓幣 比價計算器</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -10,17 +10,27 @@
     }
     .row {
         display: flex;
-        gap: 12px;
+        gap: 10px;
         margin-top: 12px;
         align-items: center;
+        flex-wrap: wrap;
     }
     select, input {
         padding: 6px;
         font-size: 14px;
     }
     input {
-        width: 150px;
+        width: 120px;
         text-align: right;
+    }
+    .qty {
+        width: 70px;
+        text-align: center;
+    }
+    .formula {
+        font-size: 13px;
+        color: #555;
+        min-width: 220px;
     }
     .result {
         font-weight: bold;
@@ -31,9 +41,9 @@
 </head>
 <body>
 
-<h2> WC / 楓幣 計算器</h2>
+<h2>WC / 楓幣 比價計算器</h2>
 
-<!-- 固定方案（預設 1990） -->
+<!-- 方案 -->
 <div class="row">
     <label>方案：</label>
     <select id="package" onchange="calculateAll()">
@@ -44,98 +54,171 @@
 
 <div id="calculator">
 
-    <!-- 第 1 行 -->
-    <div class="row calc-row">
-        <select class="item">
-            <option selected>突襲卷</option>
-            <option>高級瞬移石</option>
-            <option>飄雪結晶</option>
-            <option>其他</option>
-        </select>
-        <input class="wc" placeholder="WC" oninput="formatInput(this); calculateRow(this)">
-        <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-        <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-    </div>
+<!-- ===== 行 1 ===== -->
+<div class="row calc-row">
+    <select class="item" onchange="itemChanged(this)">
+        <option selected>突襲卷</option>
+        <option>高級瞬移石</option>
+        <option>飄雪結晶</option>
+        <option>其他</option>
+    </select>
 
-    <!-- 第 2 行 -->
-    <div class="row calc-row">
-        <select class="item">
-            <option>突襲卷</option>
-            <option selected>高級瞬移石</option>
-            <option>飄雪結晶</option>
-            <option>其他</option>
-        </select>
-        <input class="wc" placeholder="WC" oninput="formatInput(this); calculateRow(this)">
-        <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-        <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-    </div>
+    <select class="wc-select" onchange="wcPackageChanged(this)">
+        <option value="">WC方案</option>
+        <option value="1200|7">突襲卷（1200WC / 7）</option>
+        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
+        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
+    </select>
 
-    <!-- 第 3 行 -->
-    <div class="row calc-row">
-        <select class="item">
-            <option>突襲卷</option>
-            <option>高級瞬移石</option>
-            <option selected>飄雪結晶</option>
-            <option>其他</option>
-        </select>
-        <input class="wc" placeholder="WC" oninput="formatInput(this); calculateRow(this)">
-        <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-        <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-    </div>
+    <input class="qty" type="number" min="1" value="7" oninput="qtyChanged(this)">
+    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
+    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
+    <div class="formula"></div>
+    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
+</div>
 
-    <!-- 第 4 行 -->
-    <div class="row calc-row">
-        <select class="item">
-            <option>突襲卷</option>
-            <option>高級瞬移石</option>
-            <option>飄雪結晶</option>
-            <option selected>其他</option>
-        </select>
-        <input class="wc" placeholder="WC" oninput="formatInput(this); calculateRow(this)">
-        <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-        <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-    </div>
+<!-- ===== 行 2 ===== -->
+<div class="row calc-row">
+    <select class="item" onchange="itemChanged(this)">
+        <option>突襲卷</option>
+        <option selected>高級瞬移石</option>
+        <option>飄雪結晶</option>
+        <option>其他</option>
+    </select>
+
+    <select class="wc-select" onchange="wcPackageChanged(this)">
+        <option value="">WC方案</option>
+        <option value="1200|7">突襲卷（1200WC / 7）</option>
+        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
+        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
+    </select>
+
+    <input class="qty" type="number" min="1" value="110" oninput="qtyChanged(this)">
+    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
+    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
+    <div class="formula"></div>
+    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
+</div>
+
+<!-- ===== 行 3 ===== -->
+<div class="row calc-row">
+    <select class="item" onchange="itemChanged(this)">
+        <option>突襲卷</option>
+        <option>高級瞬移石</option>
+        <option selected>飄雪結晶</option>
+        <option>其他</option>
+    </select>
+
+    <select class="wc-select" onchange="wcPackageChanged(this)">
+        <option value="">WC方案</option>
+        <option value="1200|7">突襲卷（1200WC / 7）</option>
+        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
+        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
+    </select>
+
+    <input class="qty" type="number" min="1" value="110" oninput="qtyChanged(this)">
+    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
+    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
+    <div class="formula"></div>
+    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
+</div>
+
+<!-- ===== 行 4 ===== -->
+<div class="row calc-row">
+    <select class="item" onchange="itemChanged(this)">
+        <option>突襲卷</option>
+        <option>高級瞬移石</option>
+        <option>飄雪結晶</option>
+        <option selected>其他</option>
+    </select>
+
+    <select class="wc-select" onchange="wcPackageChanged(this)">
+        <option value="">WC方案</option>
+        <option value="1200|7">突襲卷（1200WC / 7）</option>
+        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
+        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
+    </select>
+
+    <input class="qty" type="number" min="1" value="1" oninput="qtyChanged(this)">
+    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
+    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
+    <div class="formula"></div>
+    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
+</div>
 
 </div>
 
 <script>
-function formatNumber(num) {
-    return num.toLocaleString("zh-TW");
+function formatNumber(n){return n.toLocaleString("zh-TW");}
+function parseNumber(s){return parseFloat(s.replace(/,/g,""))||0;}
+
+function formatInput(el){
+    const v=parseNumber(el.value);
+    el.value=v?formatNumber(v):"";
 }
 
-function parseNumber(str) {
-    return parseFloat(str.replace(/,/g, "")) || 0;
+function calculateRow(el){
+    const row=el.closest(".calc-row");
+    const wc=parseNumber(row.querySelector(".wc").value);
+    const maple=parseNumber(row.querySelector(".maple").value);
+    const result=row.querySelector(".result span");
+    if(wc<=0||maple<=0){result.innerText="0";return;}
+    const [twd,totalWC]=document.getElementById("package").value.split("|").map(Number);
+    const wcPerTwd=totalWC/twd;
+    result.innerText=formatNumber(Math.floor(wcPerTwd*(maple/wc)));
 }
 
-function formatInput(el) {
-    const value = parseNumber(el.value);
-    el.value = value ? formatNumber(value) : "";
+function calculateAll(){
+    document.querySelectorAll(".calc-row input").forEach(i=>calculateRow(i));
 }
 
-function calculateRow(el) {
-    const row = el.closest(".calc-row");
-    const wc = parseNumber(row.querySelector(".wc").value);
-    const maple = parseNumber(row.querySelector(".maple").value);
-    const resultSpan = row.querySelector(".result span");
+function wcPackageChanged(sel){
+    const row=sel.closest(".calc-row");
+    if(!sel.value)return;
+    const [total,qty]=sel.value.split("|").map(Number);
+    row.querySelector(".qty").value=qty;
+    const wc=Math.floor(total/qty);
+    row.querySelector(".wc").value=formatNumber(wc);
+    row.querySelector(".formula").innerText=
+        `${formatNumber(total)} WC ÷ ${qty} = ${formatNumber(wc)} WC`;
+    calculateRow(row.querySelector(".wc"));
+}
 
-    if (wc <= 0 || maple <= 0) {
-        resultSpan.innerText = "0";
-        return;
+function qtyChanged(inp){
+    const row=inp.closest(".calc-row");
+    const sel=row.querySelector(".wc-select");
+    if(!sel.value||inp.value<=0)return;
+    const total=parseInt(sel.value.split("|")[0]);
+    const wc=Math.floor(total/inp.value);
+    row.querySelector(".wc").value=formatNumber(wc);
+    row.querySelector(".formula").innerText=
+        `${formatNumber(total)} WC ÷ ${inp.value} = ${formatNumber(wc)} WC`;
+    calculateRow(row.querySelector(".wc"));
+}
+
+function itemChanged(sel){
+    const map={
+        "突襲卷":"1200|7",
+        "飄雪結晶":"3000|110",
+        "高級瞬移石":"4000|110"
+    };
+    const row=sel.closest(".calc-row");
+    if(map[sel.value]){
+        row.querySelector(".wc-select").value=map[sel.value];
+        wcPackageChanged(row.querySelector(".wc-select"));
+    }else{
+        row.querySelector(".wc-select").value="";
+        row.querySelector(".formula").innerText="";
     }
-
-    const [twd, totalWC] = document.getElementById("package").value.split("|").map(Number);
-    const wcPerTwd = totalWC / twd;
-    const maplePerWC = maple / wc;
-    const maplePerTwd = Math.floor(wcPerTwd * maplePerWC);
-
-    resultSpan.innerText = formatNumber(maplePerTwd);
 }
 
-function calculateAll() {
-    document.querySelectorAll(".calc-row input").forEach(el => calculateRow(el));
-}
+/* ✅ 頁面載入時自動套用預設 */
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".calc-row .item").forEach(sel => {
+        itemChanged(sel);
+    });
+});
 </script>
 
 </body>
 </html>
-
