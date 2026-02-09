@@ -2,48 +2,23 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>WC / 楓幣 比價計算器</title>
+<title>WC / 楓幣 計算器</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-    }
-    .row {
-        display: flex;
-        gap: 10px;
-        margin-top: 12px;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    select, input {
-        padding: 6px;
-        font-size: 14px;
-    }
-    input {
-        width: 120px;
-        text-align: right;
-    }
-    .qty {
-        width: 70px;
-        text-align: center;
-    }
-    .formula {
-        font-size: 13px;
-        color: #555;
-        min-width: 220px;
-    }
-    .result {
-        font-weight: bold;
-        color: #0066cc;
-        min-width: 180px;
-    }
+body { font-family: Arial, sans-serif; padding: 20px; }
+.row { display: flex; gap: 10px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
+select, input { padding: 6px; font-size: 14px; }
+input { width: 120px; text-align: right; }
+.qty { width: 70px; text-align: center; }
+.formula { font-size: 13px; color: #555; min-width: 150px; }
+.result { font-weight: bold; color: #0066cc; min-width: 180px; }
+button { padding: 6px 12px; font-size: 14px; cursor: pointer; margin-top: 10px; }
+.remove-btn { background-color: #ff6666; color: #fff; border: none; }
 </style>
 </head>
 <body>
 
 <h2>WC / 楓幣 比價計算器</h2>
 
-<!-- 方案 -->
 <div class="row">
     <label>方案：</label>
     <select id="package" onchange="calculateAll()">
@@ -52,120 +27,51 @@
     </select>
 </div>
 
-<div id="calculator">
+<div id="calculator"></div>
 
-<!-- ===== 行 1 ===== -->
-<div class="row calc-row">
-    <select class="item" onchange="itemChanged(this)">
-        <option selected>突襲卷</option>
-        <option>高級瞬移石</option>
-        <option>飄雪結晶</option>
-        <option>其他</option>
-    </select>
-
-    <select class="wc-select" onchange="wcPackageChanged(this)">
-        <option value="">WC方案</option>
-        <option value="1200|7">突襲卷（1200WC / 7）</option>
-        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
-        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
-    </select>
-
-    <input class="qty" type="number" min="1" value="7" oninput="qtyChanged(this)">
-    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
-    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-    <div class="formula"></div>
-    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-</div>
-
-<!-- ===== 行 2 ===== -->
-<div class="row calc-row">
-    <select class="item" onchange="itemChanged(this)">
-        <option>突襲卷</option>
-        <option selected>高級瞬移石</option>
-        <option>飄雪結晶</option>
-        <option>其他</option>
-    </select>
-
-    <select class="wc-select" onchange="wcPackageChanged(this)">
-        <option value="">WC方案</option>
-        <option value="1200|7">突襲卷（1200WC / 7）</option>
-        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
-        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
-    </select>
-
-    <input class="qty" type="number" min="1" value="110" oninput="qtyChanged(this)">
-    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
-    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-    <div class="formula"></div>
-    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-</div>
-
-<!-- ===== 行 3 ===== -->
-<div class="row calc-row">
-    <select class="item" onchange="itemChanged(this)">
-        <option>突襲卷</option>
-        <option>高級瞬移石</option>
-        <option selected>飄雪結晶</option>
-        <option>其他</option>
-    </select>
-
-    <select class="wc-select" onchange="wcPackageChanged(this)">
-        <option value="">WC方案</option>
-        <option value="1200|7">突襲卷（1200WC / 7）</option>
-        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
-        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
-    </select>
-
-    <input class="qty" type="number" min="1" value="110" oninput="qtyChanged(this)">
-    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
-    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-    <div class="formula"></div>
-    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-</div>
-
-<!-- ===== 行 4 ===== -->
-<div class="row calc-row">
-    <select class="item" onchange="itemChanged(this)">
-        <option>突襲卷</option>
-        <option>高級瞬移石</option>
-        <option>飄雪結晶</option>
-        <option selected>其他</option>
-    </select>
-
-    <select class="wc-select" onchange="wcPackageChanged(this)">
-        <option value="">WC方案</option>
-        <option value="1200|7">突襲卷（1200WC / 7）</option>
-        <option value="3000|110">飄雪結晶（3000WC / 110）</option>
-        <option value="4000|110">高級瞬移石（4000WC / 110）</option>
-    </select>
-
-    <input class="qty" type="number" min="1" value="1" oninput="qtyChanged(this)">
-    <input class="wc" placeholder="WC 單價" oninput="formatInput(this); calculateRow(this)">
-    <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
-    <div class="formula"></div>
-    <div class="result">1 台幣 = <span>0</span> 楓幣</div>
-</div>
-
+<div>
+    <button onclick="addRow()">新增方案</button>
 </div>
 
 <script>
-function formatNumber(n){return n.toLocaleString("zh-TW");}
-function parseNumber(s){return parseFloat(s.replace(/,/g,""))||0;}
+const defaultItems = [
+    { name: "突襲卷", wc: "1200|7" },
+    { name: "高級瞬移石", wc: "4000|110" },
+    { name: "飄雪結晶", wc: "3000|110" }
+];
+
+function formatNumber(n){ return n.toLocaleString("zh-TW"); }
+function parseNumber(s){ return parseFloat(s.replace(/,/g,""))||0; }
 
 function formatInput(el){
     const v=parseNumber(el.value);
-    el.value=v?formatNumber(v):"";
+    el.value = v ? formatNumber(v) : "";
 }
 
 function calculateRow(el){
-    const row=el.closest(".calc-row");
-    const wc=parseNumber(row.querySelector(".wc").value);
-    const maple=parseNumber(row.querySelector(".maple").value);
-    const result=row.querySelector(".result span");
-    if(wc<=0||maple<=0){result.innerText="0";return;}
-    const [twd,totalWC]=document.getElementById("package").value.split("|").map(Number);
-    const wcPerTwd=totalWC/twd;
-    result.innerText=formatNumber(Math.floor(wcPerTwd*(maple/wc)));
+    const row = el.closest(".calc-row");
+    const wcTotal = parseNumber(row.querySelector(".wc").value);
+    const maple = parseNumber(row.querySelector(".maple").value);
+    const qty = parseNumber(row.querySelector(".qty").value);
+    const result = row.querySelector(".result span");
+    const formula = row.querySelector(".formula");
+
+    formula.innerText = "";
+
+    if(!wcTotal || !maple || qty <= 0){
+        result.innerText = "";
+        return;
+    }
+
+    const wcUnit = Math.floor(wcTotal / qty);
+    formula.innerText = `單價: ${formatNumber(wcUnit)} WC`;
+
+    const [twd, totalWC] = document.getElementById("package").value.split("|").map(Number);
+    const wcPerTwd = totalWC / twd;
+
+    const maplePerTwd = Math.floor((maple / wcUnit) * wcPerTwd);
+
+    result.innerText = formatNumber(maplePerTwd);
 }
 
 function calculateAll(){
@@ -173,49 +79,97 @@ function calculateAll(){
 }
 
 function wcPackageChanged(sel){
-    const row=sel.closest(".calc-row");
-    if(!sel.value)return;
-    const [total,qty]=sel.value.split("|").map(Number);
-    row.querySelector(".qty").value=qty;
-    const wc=Math.floor(total/qty);
-    row.querySelector(".wc").value=formatNumber(wc);
-    row.querySelector(".formula").innerText=
-        `${formatNumber(total)} WC ÷ ${qty} = ${formatNumber(wc)} WC`;
+    const row = sel.closest(".calc-row");
+    if(!sel.value){
+        row.querySelector(".qty").value = ""; 
+        row.querySelector(".wc").value = "";  
+        row.querySelector(".formula").innerText = "";
+        calculateRow(row.querySelector(".wc"));
+        return;
+    }
+    const [total, qty] = sel.value.split("|").map(Number);
+    row.querySelector(".qty").value = qty;
+    row.querySelector(".wc").value = formatNumber(total);
     calculateRow(row.querySelector(".wc"));
 }
 
 function qtyChanged(inp){
-    const row=inp.closest(".calc-row");
-    const sel=row.querySelector(".wc-select");
-    if(!sel.value||inp.value<=0)return;
-    const total=parseInt(sel.value.split("|")[0]);
-    const wc=Math.floor(total/inp.value);
-    row.querySelector(".wc").value=formatNumber(wc);
-    row.querySelector(".formula").innerText=
-        `${formatNumber(total)} WC ÷ ${inp.value} = ${formatNumber(wc)} WC`;
+    const row = inp.closest(".calc-row");
     calculateRow(row.querySelector(".wc"));
 }
 
 function itemChanged(sel){
-    const map={
-        "突襲卷":"1200|7",
-        "飄雪結晶":"3000|110",
-        "高級瞬移石":"4000|110"
-    };
-    const row=sel.closest(".calc-row");
+    const map = {};
+    defaultItems.forEach(it => map[it.name] = it.wc);
+    const row = sel.closest(".calc-row");
     if(map[sel.value]){
-        row.querySelector(".wc-select").value=map[sel.value];
+        row.querySelector(".wc-select").value = map[sel.value];
         wcPackageChanged(row.querySelector(".wc-select"));
-    }else{
-        row.querySelector(".wc-select").value="";
-        row.querySelector(".formula").innerText="";
+    } else {
+        // 其他選項不自動填WC方案
+        row.querySelector(".wc-select").value = "";
+        row.querySelector(".qty").value = ""; 
+        row.querySelector(".wc").value = "";
+        row.querySelector(".maple").value = "";
+        row.querySelector(".formula").innerText = "";
+        calculateRow(row.querySelector(".wc"));
     }
 }
 
-/* ✅ 頁面載入時自動套用預設 */
+function addRow(){
+    const calculator = document.getElementById("calculator");
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row calc-row";
+    rowDiv.innerHTML = `
+        <select class="item" onchange="itemChanged(this)">
+            <option selected>其他</option>
+            ${defaultItems.map(it=>`<option value="${it.name}">${it.name}</option>`).join('')}
+        </select>
+        <select class="wc-select" onchange="wcPackageChanged(this)">
+            <option value="">WC方案</option>
+            ${defaultItems.map(it=>`<option value="${it.wc}">${it.name}（${it.wc.replace('|','WC / ')}）</option>`).join('')}
+        </select>
+        <input class="qty" type="number" min="1" placeholder="數量" oninput="qtyChanged(this)">
+        <input class="wc" placeholder="WC總價" oninput="formatInput(this); calculateRow(this)">
+        <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
+        <div class="formula"></div>
+        <div class="result">1 台幣 = <span></span> 楓幣</div>
+        <button class="remove-btn" onclick="removeRow(this)">移除</button>
+    `;
+    calculator.appendChild(rowDiv);
+}
+
+function removeRow(btn){
+    const row = btn.closest(".calc-row");
+    row.remove();
+}
+
+// 預設三種物品方案（不能刪除，預設選取 WC方案）
+const calculator = document.getElementById("calculator");
+defaultItems.forEach(it => {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row calc-row";
+    rowDiv.innerHTML = `
+        <select class="item" onchange="itemChanged(this)">
+            ${defaultItems.map(item=>`<option value="${item.name}" ${item.name===it.name?'selected':''}>${item.name}</option>`).join('')}
+        </select>
+        <select class="wc-select" onchange="wcPackageChanged(this)">
+            <option value="">WC方案</option>
+            ${defaultItems.map(item=>`<option value="${item.wc}" ${item.name===it.name?'selected':''}>${item.name}（${item.wc.replace('|','WC / ')}）</option>`).join('')}
+        </select>
+        <input class="qty" type="number" min="1" placeholder="數量" oninput="qtyChanged(this)">
+        <input class="wc" placeholder="WC總價" oninput="formatInput(this); calculateRow(this)">
+        <input class="maple" placeholder="楓幣" oninput="formatInput(this); calculateRow(this)">
+        <div class="formula"></div>
+        <div class="result">1 台幣 = <span></span> 楓幣</div>
+    `;
+    calculator.appendChild(rowDiv);
+});
+
+// 自動套用預設 WC方案
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".calc-row .item").forEach(sel => {
-        itemChanged(sel);
+    document.querySelectorAll(".calc-row .wc-select").forEach(sel => {
+        if(sel.value) wcPackageChanged(sel);
     });
 });
 </script>
