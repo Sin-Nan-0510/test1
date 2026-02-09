@@ -31,7 +31,7 @@ h2 {
     border-radius: 12px;
     padding: 10px;
     margin-bottom: 10px;
-    box-shadow: 2px 2px 8px rgba(255, 182, 193, 0.5);
+    box-shadow: 2px 2px 8px rgba(255,182,193,.5);
     font-size: 14px;
     font-weight: bold;
 }
@@ -121,7 +121,11 @@ const defaultItems = [
     { name: "高級瞬移石", wc: "4000|110" },
     { name: "飄雪結晶", wc: "3000|110" },
     { name: "神秘背包", wc: "3750|15" },
-    { name: "護身符咒", wc: "4500|110" }
+    { name: "護身符咒", wc: "4500|110" },
+    { name: "AP初始化卷軸", wc: "800|2" },
+    { name: "SP初始化卷軸", wc: "600|2" },
+    { name: "高效能喇叭(紅色)", wc: "1200|11" },
+    { name: "高效能喇叭(黃色)", wc: "1400|11" }
 ];
 
 function formatNumber(n) {
@@ -156,7 +160,9 @@ function calculateRow(el) {
     const wcUnit = Math.floor(wcTotal / qty);
     formula.innerText = `單價: ${formatNumber(wcUnit)} WC`;
 
-    const [twd, totalWC] = document.getElementById("package").value.split("|").map(Number);
+    const [twd, totalWC] =
+        document.getElementById("package").value.split("|").map(Number);
+
     const wcPerTwd = totalWC / twd;
     const maplePerTwd = Math.floor((maple / wcUnit) * wcPerTwd);
 
@@ -170,13 +176,9 @@ function updateBestChoice() {
 
     document.querySelectorAll(".calc-row").forEach(row => {
         row.querySelector(".best")?.remove();
-
-        const value = parseNumber(
-            row.querySelector(".result span").innerText
-        );
-
-        if (value > bestValue) {
-            bestValue = value;
+        const v = parseNumber(row.querySelector(".result span").innerText);
+        if (v > bestValue) {
+            bestValue = v;
             bestRow = row;
         }
     });
@@ -203,47 +205,47 @@ function wcPackageChanged(sel) {
     calculateRow(row.querySelector(".wc"));
 }
 
-function addRow(selectedIndex = null) {
+function addRow(defaultIndex = null) {
     const row = document.createElement("div");
     row.className = "row calc-row";
 
     row.innerHTML = `
         <select class="wc-select" onchange="wcPackageChanged(this)">
             <option value="">WC方案</option>
-            ${defaultItems.map((it, i) =>
-                `<option value="${it.wc}" ${i === selectedIndex ? "selected" : ""}>
+            ${defaultItems.map(it =>
+                `<option value="${it.wc}">
                     ${it.name}（${it.wc.replace("|"," WC / ")}）
                  </option>`
             ).join("")}
         </select>
 
         <input class="qty" type="text" inputmode="numeric"
-               placeholder="數量"
-               oninput="calculateRow(this)">
+               placeholder="數量" oninput="calculateRow(this)">
 
         <input class="wc" type="text" inputmode="numeric"
                placeholder="WC總價"
-               oninput="calculateRow(this)"
-               onblur="formatInput(this)">
+               oninput="calculateRow(this)" onblur="formatInput(this)">
 
         <input class="maple" type="text" inputmode="numeric"
                placeholder="楓幣"
-               oninput="calculateRow(this)"
-               onblur="formatInput(this)">
+               oninput="calculateRow(this)" onblur="formatInput(this)">
 
         <div class="formula"></div>
         <div class="result">1 台幣 = <span></span> 楓幣</div>
-        <button class="remove-btn" onclick="this.closest('.calc-row').remove(); updateBestChoice()">❌</button>
+        <button class="remove-btn"
+            onclick="this.closest('.calc-row').remove(); updateBestChoice()">❌</button>
     `;
 
     document.getElementById("calculator").appendChild(row);
 
-    if (selectedIndex !== null) {
-        wcPackageChanged(row.querySelector(".wc-select"));
+    if (defaultIndex !== null) {
+        const sel = row.querySelector(".wc-select");
+        sel.selectedIndex = defaultIndex + 1;
+        wcPackageChanged(sel);
     }
 }
 
-// 預設三個方案
+// 預設三行
 addRow(0); // 突襲卷
 addRow(1); // 高級瞬移石
 addRow(2); // 飄雪結晶
